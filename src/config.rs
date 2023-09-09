@@ -11,14 +11,14 @@ cfg_if! {
         pub const CIRCUITS: &[&str] = &["_FE1", "_FE2"];
         pub const TIMEOUT: u64 = 2 * 60;
         pub const MONITOR: u64 = 10;
-        pub const MAX_DOWNLOAD_UPLOAD: i32 = 200;
+        pub const MAX_DOWNLOAD_UPLOAD: i32 = 20;
         pub const MAX_WALLET_UPDATE: i32 = 5;
     } else {
         pub const CIRCUITS: &[&str] = &[""];
         pub const TIMEOUT: u64 = 30 * 60;
         pub const MONITOR: u64 = 30;
-        pub const MAX_DOWNLOAD_UPLOAD: i32 = 1000;
-        pub const MAX_WALLET_UPDATE: i32 = 30;
+        pub const MAX_DOWNLOAD_UPLOAD: i32 = 100;
+        pub const MAX_WALLET_UPDATE: i32 = 10;
     }
 }
 
