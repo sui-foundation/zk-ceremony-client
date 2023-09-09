@@ -1,0 +1,38 @@
+[package]
+name = "zk-ceremony-client"
+version = "0.1.0"
+authors = ["Mysten Labs <eng@mystenlabs.com>"]
+description = "Contribution client for zklogin ceremony."
+license = "Apache-2.0"
+publish = false
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jsonrpsee = { version = "0.18.1", features = ["server", "http-client", "ws-client", "macros"] }
+jsonrpsee-types = "0.18.2"
+tokio = { version = "1.16", features = ["full"] }
+serde = "1.0"
+exitcode = "1.1.2"
+fastcrypto = { git = "https://github.com/MystenLabs/fastcrypto", rev = "c961a01596a87e76f590c7e43aca9d57106dbbb1" }
+sui-sdk = { git = "https://github.com/MystenLabs/sui", rev = "6d3e9b9b1bf19cd33ab608233e8a527372d7b6c9", package = "sui-sdk" }
+shared-crypto = { git = "https://github.com/MystenLabs/sui", rev = "6d3e9b9b1bf19cd33ab608233e8a527372d7b6c9", package = "shared-crypto" }
+phase2 = { git = "https://github.com/MystenLabs/phase2-bn254", rev = "f10c8a41ae019fb68c66fae0276159900b3a128c" }
+hex = "0.4"
+anyhow = "1"
+tracing = "0.1.34"
+tracing-subscriber = { version = "0.3.3", features = ["env-filter"] }
+bcs = "0.1.5"
+cfg-if = "1.0.0"
+
+[[bin]]
+name = "contribute"
+
+[features]
+small_circuit = []
+localhost = []
+local_small_circuit = ["localhost", "small_circuit"]
+public_small_circuit = ["small_circuit"]
+local = ["localhost"]
+default = []
