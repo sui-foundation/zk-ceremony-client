@@ -12,8 +12,8 @@ use fastcrypto::{
 use jsonrpsee::rpc_params;
 use phase2::phase2::contribute;
 use std::cmp::min;
-use std::time::Duration;
 use std::thread;
+use std::time::Duration;
 use sui_sdk::types::crypto::{Signature, ToFromBytes};
 use tracing::{info, warn};
 use zk_ceremony_client::config::{
@@ -162,7 +162,7 @@ async fn main() -> anyhow::Result<()> {
     let sig = sign_msg(&key, &msg);
 
     let mut queue_position = 0;
-        
+
     loop {
         let get_queue_res: JsonRpcResult<GetQueueResponse> =
             http_client(URI.to_string(), "get_queue".to_string(), rpc_params!()).await;
