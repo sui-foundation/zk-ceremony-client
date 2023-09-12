@@ -18,7 +18,7 @@ use std::io::{Read, Write};
 use sui_sdk::types::base_types::SuiAddress;
 use sui_sdk::types::crypto::SuiSignature;
 use sui_sdk::types::crypto::{Ed25519SuiSignature, Signature};
-use tracing::info;
+use tracing::{info, warn};
 
 pub type JsonRpcResult<T> = Result<T, jsonrpsee_types::ErrorObject<'static>>;
 
@@ -174,7 +174,7 @@ pub async fn http_client<T: DeserializeOwned>(
     match response {
         Ok(r) => Ok(r),
         Err(e) => {
-            info!("{e}");
+            warn!("{e}");
             Err(to_json_rpc_err("Rpc call error"))
         }
     }

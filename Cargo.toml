@@ -10,8 +10,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-jsonrpsee = { version = "0.18.1", features = ["server", "http-client", "ws-client", "macros"] }
-jsonrpsee-types = "0.18.2"
+jsonrpsee = { version = "0.20.0", features = ["server", "http-client", "ws-client", "macros"] }
+jsonrpsee-types = "0.20.0"
 tokio = { version = "1.16", features = ["full"] }
 serde = "1.0"
 exitcode = "1.1.2"

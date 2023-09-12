@@ -13,6 +13,7 @@ use jsonrpsee::rpc_params;
 use phase2::phase2::contribute;
 use std::cmp::min;
 use std::time::Duration;
+use std::thread;
 use sui_sdk::types::crypto::{Signature, ToFromBytes};
 use tracing::{info, warn};
 use zk_ceremony_client::config::{
@@ -44,14 +45,14 @@ async fn join_queue(pk: &Ed25519PublicKey, sig: &Signature) -> JsonRpcResult<Joi
 }
 
 async fn get_params(pk: &Ed25519PublicKey, sig: &Signature) -> JsonRpcResult<GetParamsResponse> {
-    let join_queue_query = GetParamsRequest {
+    let get_params_query = GetParamsRequest {
         pk: pk.to_string(),
         sig: Base64::encode(sig),
     };
     http_client(
         URI.to_string(),
         "get_params".to_string(),
-        rpc_params!(join_queue_query.clone()),
+        rpc_params!(get_params_query.clone()),
     )
     .await
 }
@@ -161,6 +162,7 @@ async fn main() -> anyhow::Result<()> {
     let sig = sign_msg(&key, &msg);
 
     let mut queue_position = 0;
+        
     loop {
         let get_queue_res: JsonRpcResult<GetQueueResponse> =
             http_client(URI.to_string(), "get_queue".to_string(), rpc_params!()).await;
@@ -211,7 +213,7 @@ async fn main() -> anyhow::Result<()> {
             }
         }
 
-        let mut interval = tokio::time::interval(Duration::from_secs(MONITOR / 4));
-        interval.tick().await;
+        let interval = Duration::from_secs(MONITOR / 2);
+        thread::sleep(interval);
     }
 }
