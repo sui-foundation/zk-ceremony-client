@@ -16,7 +16,7 @@ cfg_if! {
     } else {
         pub const CIRCUITS: &[&str] = &[""];
         pub const TIMEOUT: u64 = 30 * 60;
-        pub const MONITOR: u64 = 30;
+        pub const MONITOR: u64 = 60;
         pub const MAX_DOWNLOAD_UPLOAD: i32 = 100;
         pub const MAX_WALLET_UPDATE: i32 = 10;
     }

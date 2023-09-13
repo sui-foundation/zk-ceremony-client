@@ -213,7 +213,7 @@ async fn main() -> anyhow::Result<()> {
             }
         }
 
-        let interval = Duration::from_secs(MONITOR / 2);
+        let interval = Duration::from_secs(MONITOR);
         thread::sleep(interval);
     }
 }
